@@ -14,6 +14,7 @@ function myFunc() {
 async function getData(value) {
     const res = await fetch(`https://corporate-marketing-backend.skyeng.ru/landing/public/v2/prices/by-preferred-link/${value}`);
     const data = await res.json();
+    console.log(data)
     distributionValues(data)
 }
 
@@ -80,8 +81,8 @@ function addElement(priceDiv, value, i) {
     sales.classList.add('new-elem-div');
 
     quantity.innerHTML = `${value.positions[i].quantity} lessons`;
-    cost.innerHTML = `${value.positions[i].cost} ${value.positions[i].currency}`;
-    costWithoutDiscount.innerHTML = `${value.positions[i].costWithoutDiscount} ${value.positions[i].currency}`;
+    cost.innerHTML = `${value.positions[i].cost / value.positions[i].quantity} ${value.positions[i].currency} per lesson`;
+    costWithoutDiscount.innerHTML = `${value.positions[i].costWithoutDiscount / value.positions[i].quantity} ${value.positions[i].currency}`;
     sales.innerHTML = `Saving ${value.positions[i].costWithoutDiscount - value.positions[i].cost} ${value.positions[i].currency}`;
 
 
